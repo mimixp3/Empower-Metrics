@@ -1,0 +1,113 @@
+import csv
+import matplotlib.pyplot as plt
+
+def add_women_details():
+    with open('women_details.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        name = input("Enter woman's name: ")
+        age = input("Enter age: ")
+        case = input("Enter case type: ")
+        writer.writerow([name, age, case])
+    print("Details added successfully.")
+
+def search_women_details():
+    search_name = input("Enter the name to search: ")
+    with open('women_details.csv', mode='r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] == search_name:
+                print("Record Found:", row)
+                return
+    print("No record found.")
+
+def delete_women_details():
+    delete_name = input("Enter the name to delete: ")
+    rows = []
+    with open('women_details.csv', mode='r') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+    with open('women_details.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        for row in rows:
+            if row[0] != delete_name:
+                writer.writerow(row)
+    print("Record deleted successfully.")
+
+def show_all_women_details():
+    with open('women_details.csv', mode='r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            print(row)
+
+def add_police_details():
+    with open('police_details.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        name = input("Enter police in-charge name: ")
+        department = input("Enter department: ")
+        writer.writerow([name, department])
+    print("Police details added successfully.")
+
+def search_police_details():
+    search_name = input("Enter police in-charge name to search: ")
+    with open('police_details.csv', mode='r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] == search_name:
+                print("Record Found:", row)
+                return
+    print("No record found.")
+
+def delete_police_details():
+    delete_name = input("Enter police in-charge name to delete: ")
+    rows = []
+    with open('police_details.csv', mode='r') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+    with open('police_details.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        for row in rows:
+            if row[0] != delete_name:
+                writer.writerow(row)
+    print("Record deleted successfully.")
+
+def show_charts():
+    years = [2018, 2019, 2020, 2021]
+    cases = [50, 45, 60, 55]
+    plt.bar(years, cases, color='blue')
+    plt.xlabel('Year')
+    plt.ylabel('Number of Cases')
+    plt.title('Crimes Against Women Over the Years')
+    plt.show()
+
+while True:
+    print("\n1. Add women's details")
+    print("2. Search women's details")
+    print("3. Delete women's details")
+    print("4. Show all women's details")
+    print("5. Add police details")
+    print("6. Search police details")
+    print("7. Delete police details")
+    print("8. Show charts")
+    print("9. Exit")
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        add_women_details()
+    elif choice == 2:
+        search_women_details()
+    elif choice == 3:
+        delete_women_details()
+    elif choice == 4:
+        show_all_women_details()
+    elif choice == 5:
+        add_police_details()
+    elif choice == 6:
+        search_police_details()
+    elif choice == 7:
+        delete_police_details()
+    elif choice == 8:
+        show_charts()
+    elif choice == 9:
+        print("Exiting...")
+        break
+    else:
+        print("Invalid choice! Please try again.")
